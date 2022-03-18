@@ -2,8 +2,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Random;
+
 public class markovChain {
     ArrayDictionary main = new ArrayDictionary();
+    private int counter=0;
+    private int numWords=0;
+    private String finalString="";
 
     private void fileToDictionary(String fileName) throws FileNotFoundException {
         File qF=new File(fileName);
@@ -27,10 +32,34 @@ public class markovChain {
         }
     }
 
+
+
+    public String genString(int words, String startWord){
+        finalString+=startWord;
+        String baseWord="";
+        String genWord="";
+        Random r=new Random();
+        for(int i=0;i<words-1;i++){
+            if(i==0){
+                baseWord=startWord;
+            }
+            ArrayList posWrds=(ArrayList) main.get(baseWord);
+            int rVal=r.nextInt(posWrds.size());
+            genWord=(String) posWrds.get(rVal);
+
+            finalString+=" ";
+            finalString+=genWord;
+            baseWord=genWord;
+
+        }
+        return finalString;
+
+    }
+
     public static void main(String[] args) throws FileNotFoundException {
         markovChain m = new markovChain();
         m.fileToDictionary("test.txt");
-        System.out.println(m.main.values());
+        System.out.println(m.genString(100, "down"));
     }
 
 
