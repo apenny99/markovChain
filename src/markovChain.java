@@ -1,5 +1,16 @@
+/**
+ * MarkovChain
+ * Makes a markov chain based on strings
+ * Author: August Penny
+ * Collaborator(s): The names of anyone you collaborated with here
+ * Collaboration: Describe the collaboration that took place
+ * Date: 3/18/21
+ **/
+
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Random;
@@ -34,7 +45,7 @@ public class markovChain {
 
 
 
-    public String genString(int words, String startWord){
+    public String genString(int words, String startWord, String fileToSave){
         finalString+=startWord;
         String baseWord="";
         String genWord="";
@@ -52,6 +63,16 @@ public class markovChain {
             baseWord=genWord;
 
         }
+        try { //writes the output string to a file
+            FileWriter myWriter = new FileWriter(fileToSave);
+            myWriter.write(finalString);
+            myWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+
         return finalString;
 
     }
@@ -59,9 +80,9 @@ public class markovChain {
     public static void main(String[] args) throws FileNotFoundException {
         markovChain m = new markovChain();
         m.fileToDictionary("test.txt");
-        System.out.println(m.genString(100, "down"));
+        System.out.println(m.genString(100, "down","Output.txt"));
     }
 
 
-    
+
 }
