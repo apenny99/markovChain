@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.util.Scanner;
 import java.util.ArrayList;
 public class markovChain {
@@ -20,19 +19,20 @@ public class markovChain {
                     ArrayList tmp3=new ArrayList();
                     tmp3.add(tmpArr[i+1]);
                     main.put(tmpArr[i],tmp3);
-
                 } else if(main.contains(tmpArr[i])){
                     ArrayList tmp4= (ArrayList) main.get(tmpArr[i]);
                     tmp4.add(tmpArr[i+1]);
-
                 }
-
-
             }
-
         }
-
     }
+
+    public static void main(String[] args) throws FileNotFoundException {
+        markovChain m = new markovChain();
+        m.fileToDictionary("test.txt");
+        System.out.println(m.main.values());
+    }
+
 
     
 }
