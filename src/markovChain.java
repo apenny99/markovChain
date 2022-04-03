@@ -21,16 +21,13 @@ public class markovChain {
     private int numWords=0;
     private String finalString="";
 
-    private void fileToDictionary(String fileName) throws FileNotFoundException {
+    public void fileToDictionary(String fileName) throws FileNotFoundException {
         File qF=new File(fileName);
         Scanner fR=new Scanner(qF);
         while(fR.hasNextLine()){
             String temp=fR.nextLine();
             String[] tmpArr = temp.split(" ");
             for(int i=0;i<tmpArr.length-1;i++){
-//                if(tmpArr[i].indexOf(".")>-1){
-//                    tmpArr[i].replace('.',' ');
-//                }
                 if(!main.contains(tmpArr[i])){
                     ArrayList tmp3=new ArrayList();
                     tmp3.add(tmpArr[i+1]);
@@ -45,7 +42,12 @@ public class markovChain {
 
 
 
-    public String genString(int words, String startWord, String fileToSave){
+    public String genString(String fileToSave){
+        Scanner s=new Scanner(System.in);
+        System.out.println("How many words would you like your string to be?: ");
+        int words=s.nextInt();//gets desired number of words
+        System.out.println("What would you like your starting word to be?: ");
+        String startWord=s.next();//gets desired starting word
         finalString+=startWord;
         String baseWord="";
         String genWord="";
@@ -77,11 +79,6 @@ public class markovChain {
 
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
-        markovChain m = new markovChain();
-        m.fileToDictionary("test.txt");
-        System.out.println(m.genString(100, "down","Output.txt"));
-    }
 
 
 
